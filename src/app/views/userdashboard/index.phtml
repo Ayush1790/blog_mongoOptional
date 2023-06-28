@@ -1,28 +1,17 @@
-<div>
-  <h1 class='text-center m-2 p-4 bg-dark text-white'>My Restaurant</h1>
-  <div class='text-center'>
-    <form action="userdashboard" method="post">
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-        <input type="search" name="cuisine" id="" placeholder="Search by cuisine" class='form-control'></div>
-        <div class="col-1"><input type="submit" value='submit' class='btn btn-primary mx-2 p-1'></div>
-      </div>
-    </form>
-  </div>
-  <?php
-  echo "<div class='d-flex flex-wrap m-2 text-center' >";
-  foreach ($data as $key => $value) {
-    echo "<div class='card m-2 p-2' style='width: 16rem;'>
-  <div class='card-body'>
-    <h3 class='card-title text-primary'>$value->name</h3>
-    <p class='card-text text-secondary'>Cuisine : $value->cuisine</p>
-    <p class='card-text'>" . $value->address->building . "," . $value->address->street .
-     " " . $value->address->zipcode . "</p>
-    <a href='order?id=$value->restaurant_id' class='btn btn-primary'>order</a>
-  </div>
-</div>";
-  }
-  echo "</div>";
-  ?>
-</div>
+<?php
+include_once APP_PATH."/assets/header.php";
+session_start();
+?>
+<br>
+<img src="../../../public/assets/img/headerimg.jpg.jpg" alt=""  width=100% height=400>
+<?php
+foreach ($data as $key => $value) {
+echo "<div class='container m-2 p-2 border'>
+<h2 class='text-center m-1 text-primary'>$value->title</h2>
+<div class='overflow-hidden p-2 ' style='height:200px;'>$value->desc</div>
+";
+if($value->user_id==$_SESSION['isLogin']){
+  echo "<a class='btn btn-info' href='edit?id=$value->id'>Edit</a>";
+}
+ echo "</div>";
+}

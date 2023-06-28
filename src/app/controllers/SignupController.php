@@ -18,9 +18,8 @@ class SignupController extends Controller
         'email' => $escaper->escapeHtml($this->request->getPost('email')),
         'pswd' =>  $escaper->escapeHtml($this->request->getPost('pswd')),
         'pincode' => $escaper->escapeHtml($this->request->getPost('pincode')),
-        'role' => 'user'
     );
-    $res = $this->mongo->store->user->insertOne($data);
+    $res = $this->mongo->blog->user->insertOne($data);
         if ($res->getInsertedCount()) {
             $this->response->redirect('login');
         }

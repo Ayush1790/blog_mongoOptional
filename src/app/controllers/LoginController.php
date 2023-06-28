@@ -14,17 +14,10 @@ class LoginController extends Controller
     {
         $email = $this->request->getPost('email');
         $pswd = $this->request->getPost('pswd');
-        $response = $this->mongo->store->user->findOne(['email' => $email, 'pswd' => $pswd]);
+        $response = $this->mongo->blog->user->findOne(['email' => $email, 'pswd' => $pswd]);
         if ($response) {
-            $_SESSION['role'] = $response->role;
-            $_SESSION['id'] = $response->email;
-            if ($response->role == 'user') {
-                $this->response->redirect('userdashboard');
-            } elseif ($response->role == 'admin') {
-                $this->response->redirect('admin');
-            } elseif ($response->role == 'manager') {
-                $this->response->redirect('manager');
-            }
+            $_SESSION['isLogin']=$response->id;
+            $this->response->redirect('userdashboard');
         } else {
             echo "Wrong email or password";
             echo $this->tag->linkTo('login/index', ' Go Back');

@@ -1,33 +1,17 @@
-<a href='admin/add' class="btn btn-primary p-1 m-2 ">Add Resturant </a>
-<a href='admin/manager' class="btn btn-primary p-1 m-2">Add Manager </a>
-<table class="table table-hovered table-striped table-bordered">
-    <caption>table shows orders detail</caption>
-    <thead>
-        <th>Customer Name</th>
-        <th>Customer Address</th>
-        <th>Resturant Name </th>
-        <th>Cuisine</th>
-        <th>time</th>
-    </thead>
-    <tbody>
-        <?php
-        echo $data;
-        ?>
-    </tbody>
-</table>
-<table class="table table-hovered table-striped table-bordered">
-    <caption>table shows users detail</caption>
-    <thead>
-        <th>Customer Name</th>
-        <th>Customer email</th>
-        <th>Customer PinCode </th>
-        <th>Role</th>
-    </thead>
-    <tbody>
-        <?php
-        foreach ($user as $key => $value) {
-           echo "<tr><td>$value->name</td><td>$value->email</td><td>$value->pincode</td><td>$value->role</td></tr>";
-        }
-        ?>
-    </tbody>
-</table>
+<?php
+include_once APP_PATH . "/assets/header.php";
+session_start();
+?>
+<br>
+<img src="../../../public/assets/img/headerimg.jpg.jpg" alt="" width=100% height=400>
+<?php
+foreach ($data as $key => $value) {
+    echo "<div class='container m-2 p-2 border'>
+<h2 class='text-center m-1 text-primary'>$value->title</h2>
+<div class='overflow-hidden p-2 ' style='height:200px;'>$value->desc</div>
+";
+
+    echo "<a class='btn btn-info' href='edit?id=$value->id'>Edit</a>";
+
+    echo "</div>";
+}
